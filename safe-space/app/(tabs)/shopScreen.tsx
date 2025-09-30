@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-    Image,
-    ImageBackground,
-    ImageSourcePropType,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View
+  Image,
+  ImageBackground,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 import { useFonts } from 'expo-font';
@@ -14,10 +14,11 @@ import { useFonts } from 'expo-font';
 interface ProductCardProps {
   title: string;
   subtitle: string;
+  description?: string;
   imageSource: ImageSourcePropType;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, imageSource }) => (
+const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, description, imageSource }) => (
   <View style={styles.card}>
     <View style={styles.imageContainer}>
       <Image source={imageSource} style={styles.productImage} resizeMode="cover" />
@@ -54,14 +55,18 @@ const BasketballShop: React.FC = () => {
         {overlayVisible && selectedProduct && (
         <View style={styles.overlayContainer}>
             <View style={styles.overlayBox}>
-            <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
-            <Text style={styles.overlaySubtitle}>{selectedProduct.subtitle}</Text>
-
+        
             <Image
                 source={selectedProduct.imageSource}
                 style={styles.overlayImage}
                 resizeMode="contain"
             />
+
+            <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
+            <Text style={styles.overlaySubtitle}>{selectedProduct.subtitle}</Text>
+            {selectedProduct.description && (
+              <Text style={styles.overlayDescription}>{selectedProduct.description}</Text>
+            )}
 
             <TouchableOpacity style={styles.closeButton} onPress={closeOverlay}>
                 <Text style={styles.closeButtonText}>Close</Text>
@@ -90,6 +95,7 @@ const BasketballShop: React.FC = () => {
                     title: "Wilson NBA",
                     subtitle: "Call 911",
                     imageSource: require('../../assets/images/shopImages/wilsonNBABall.png'),
+                    description: "description",
                     })
                 }
                 >
@@ -340,7 +346,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-    overlayContainer: {
+  overlayContainer: {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -352,42 +358,49 @@ const styles = StyleSheet.create({
     zIndex: 999,
     elevation: 10,
   },
-    overlayBox: {
+  overlayBox: {
     width: '80%',
     backgroundColor: '#1a1f3a',
     padding: 20,
     borderRadius: 12,
     alignItems: 'center',
   },
-    overlayTitle: {
+  overlayTitle: {
     fontSize: 24,
     fontFamily: 'Jersey10',
     color: 'white',
     marginBottom: 10,
     textAlign: 'center',
   },
-    overlaySubtitle: {
+  overlaySubtitle: {
     fontSize: 14,
     fontFamily: 'Jersey10',
     color: '#bbb',
     marginBottom: 20,
     textAlign: 'center',
   },
-    overlayImage: {
+  overlayImage: {
     width: 200,
     height: 200,
     marginBottom: 20,
   },
-    closeButton: {
+  closeButton: {
     backgroundColor: '#f39c12',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
   },
-    closeButtonText: {
+  closeButtonText: {
     color: 'white',
     fontSize: 16,
     fontFamily: 'Jersey10',
+  },
+  overlayDescription: {
+    fontSize: 12,
+    fontFamily: 'Jersey10',
+    color: '#ccc',
+    marginBottom: 20,
+    textAlign: 'center',
   },
 });
 
