@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Image,
     ImageBackground,
     ImageSourcePropType,
-    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -37,14 +36,46 @@ const BasketballShop: React.FC = () => {
 
     if (!fontsLoaded) return null;
 
+    const [overlayVisible, setOverlayVisible] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<ProductCardProps | null>(null);
+
+    const handleCardPress = (product: ProductCardProps) => {
+        setSelectedProduct(product);
+        setOverlayVisible(true);
+    };
+
+    const closeOverlay = () => {
+        setOverlayVisible(false);
+        setSelectedProduct(null);
+    };
+
   return (
     <View style={styles.container}>
+        {overlayVisible && selectedProduct && (
+        <View style={styles.overlayContainer}>
+            <View style={styles.overlayBox}>
+            <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
+            <Text style={styles.overlaySubtitle}>{selectedProduct.subtitle}</Text>
+
+            <Image
+                source={selectedProduct.imageSource}
+                style={styles.overlayImage}
+                resizeMode="contain"
+            />
+
+            <TouchableOpacity style={styles.closeButton} onPress={closeOverlay}>
+                <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+            </View>
+        </View>
+        )}
+
     <ImageBackground source={require('../../assets/images/shopImages/courtFloor.jpg')} style={styles.background}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Shop</Text>
       </View>
 
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <View style={styles.content}>
         {/* Basketballs Section */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
@@ -52,21 +83,54 @@ const BasketballShop: React.FC = () => {
           </View>
           
           <View style={styles.productGrid}>
-            <ProductCard
-              title="Wilson NBA"
-              subtitle="Call 911"
-              imageSource={require('../../assets/images/shopImages/wilsonNBABall.png')}
-            />
-            <ProductCard
-              title="Spalding NBA"
-              subtitle="Call Contact1"
-              imageSource={require('../../assets/images/shopImages/spaldingNBABall.png')}
-            />
-            <ProductCard
-              title="Wilson EVO"
-              subtitle="Call Hotline"
-              imageSource={require('../../assets/images/shopImages/wilsonEVOBall.png')}
-            />
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "Wilson NBA",
+                    subtitle: "Call 911",
+                    imageSource: require('../../assets/images/shopImages/wilsonNBABall.png'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="Wilson NBA"
+                    subtitle="Call 911"
+                    imageSource={require('../../assets/images/shopImages/wilsonNBABall.png')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "Spalding NBA",
+                    subtitle: "Call Contact1",
+                    imageSource: require('../../assets/images/shopImages/spaldingNBABall.png'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="Spalding NBA"
+                    subtitle="Call Contact1"
+                    imageSource={require('../../assets/images/shopImages/spaldingNBABall.png')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "Wilson EVO",
+                    subtitle: "Call Hotline",
+                    imageSource: require('../../assets/images/shopImages/wilsonEVOBall.png'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="Wilson EVO"
+                    subtitle="Call Hotline"
+                    imageSource={require('../../assets/images/shopImages/wilsonEVOBall.png')}
+                />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -77,24 +141,57 @@ const BasketballShop: React.FC = () => {
           </View>
           
           <View style={styles.productGrid}>
-            <ProductCard
-              title="Madison Square Garden"
-              subtitle="Other Options"
-              imageSource={require('../../assets/images/shopImages/madisonSquareGarden.png')}
-            />
-            <ProductCard
-              title="STAPLES Center"
-              subtitle="Other Options"
-              imageSource={require('../../assets/images/shopImages/staplesCenter.jpg')}
-            />
-            <ProductCard
-              title="Capital One Arena"
-              subtitle="Other Options"
-              imageSource={require('../../assets/images/shopImages/capitalOneArena.jpg')}
-            />
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "Madison Square Garden",
+                    subtitle: "Other Options",
+                    imageSource: require('../../assets/images/shopImages/madisonSquareGarden.png'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="Madison Square Garden"
+                    subtitle="Other Options"
+                    imageSource={require('../../assets/images/shopImages/madisonSquareGarden.png')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "STAPLES Center",
+                    subtitle: "Other Options",
+                    imageSource: require('../../assets/images/shopImages/staplesCenter.jpg'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="STAPLES Center"
+                    subtitle="Other Options"
+                    imageSource={require('../../assets/images/shopImages/staplesCenter.jpg')}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={{ width: '30%' }}
+                onPress={() =>
+                    handleCardPress({
+                    title: "Capital One Arena",
+                    subtitle: "Other Options",
+                    imageSource: require('../../assets/images/shopImages/capitalOneArena.jpg'),
+                    })
+                }
+                >
+                <ProductCard
+                    title="Capital One Arena"
+                    subtitle="Other Options"
+                    imageSource={require('../../assets/images/shopImages/capitalOneArena.jpg')}
+                />
+            </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      </View>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
@@ -167,7 +264,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   card: {
-    width: '30%',
     marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -243,6 +339,55 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
+  },
+    overlayContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
+    elevation: 10,
+  },
+    overlayBox: {
+    width: '80%',
+    backgroundColor: '#1a1f3a',
+    padding: 20,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+    overlayTitle: {
+    fontSize: 24,
+    fontFamily: 'Jersey10',
+    color: 'white',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+    overlaySubtitle: {
+    fontSize: 14,
+    fontFamily: 'Jersey10',
+    color: '#bbb',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+    overlayImage: {
+    width: 200,
+    height: 200,
+    marginBottom: 20,
+  },
+    closeButton: {
+    backgroundColor: '#f39c12',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+    closeButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Jersey10',
   },
 });
 
