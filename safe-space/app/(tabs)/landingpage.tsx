@@ -1,14 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-
 export default function LandingPage({ navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>
       {/* App Name */}
       <Text style={styles.title}>SafeSpace</Text>
       <Text style={styles.subtitle}>Your safe space for support & growth</Text>
-
       {/* Emergency Button */}
       <TouchableOpacity
         style={styles.emergencyButton}
@@ -16,7 +14,6 @@ export default function LandingPage({ navigation }: any) {
       >
         <Text style={styles.emergencyText}>EMERGENCY HELP!</Text>
       </TouchableOpacity>
-
       {/* Grid Buttons */}
       <View style={styles.grid}>
         <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Call")}>
@@ -25,21 +22,18 @@ export default function LandingPage({ navigation }: any) {
           </View>
           <Text style={styles.gridText}>call for help</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Resources")}>
           <View style={[styles.iconCircle, { backgroundColor: "#4C6CD9" }]}>
             <FontAwesome name="search" size={32} color="white" />
           </View>
           <Text style={styles.gridText}>find resources</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Chat")}>
           <View style={[styles.iconCircle, { backgroundColor: "#4CD94C" }]}>
             <FontAwesome name="comments" size={32} color="white" />
           </View>
           <Text style={styles.gridText}>chat with mentor</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Guide")}>
           <View style={[styles.iconCircle, { backgroundColor: "#D9D44C" }]}>
             <FontAwesome name="lightbulb-o" size={32} color="white" />
@@ -47,24 +41,20 @@ export default function LandingPage({ navigation }: any) {
           <Text style={styles.gridText}>safety guide</Text>
         </TouchableOpacity>
       </View>
-
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="home-outline" size={28} color="white" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="chatbubble-outline" size={28} color="white" />
           <Text style={styles.navText}>Chat</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="location-outline" size={28} color="white" />
           <Text style={styles.navText}>Location</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="people-outline" size={28} color="white" />
           <Text style={styles.navText}>Profile</Text>
@@ -73,7 +63,6 @@ export default function LandingPage({ navigation }: any) {
     </SafeAreaView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -160,7 +149,4 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
-
-
-
 
