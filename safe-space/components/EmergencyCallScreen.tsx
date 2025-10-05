@@ -9,10 +9,18 @@ import {
   SafeAreaView,
   Dimensions,
 } from 'react-native';
+import { useFonts } from 'expo-font';
 
 const { width } = Dimensions.get('window');
 
 const EmergencyCallScreen: React.FC = () => {
+  const [fontsLoaded] = useFonts({
+    'Jersey10': require('../assets/fonts/Jersey10-Regular.ttf'), 
+  });
+
+  if (!fontsLoaded) {
+    return null; 
+  }
   const handleCall911 = (): void => {
     Alert.alert(
       "Emergency Call",
@@ -36,8 +44,9 @@ const EmergencyCallScreen: React.FC = () => {
   const PhoneIcon: React.FC = () => (
     <View style={styles.phoneIconContainer}>
       <View style={styles.phoneShape}>
-        <View style={[styles.phoneCurve, styles.topCurve]} />
-        <View style={[styles.phoneCurve, styles.bottomCurve]} />
+        <Text style={styles.instructionText}>
+          📞
+        </Text>
       </View>
     </View>
   );
@@ -100,6 +109,7 @@ const styles = StyleSheet.create({
     color: '#CC1212',
     textAlign: 'center',
     letterSpacing: 2,
+    fontFamily: 'Jersey 10',
   },
   phoneIconsContainer: {
     flexDirection: 'row',
