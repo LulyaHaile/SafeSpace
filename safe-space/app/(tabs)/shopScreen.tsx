@@ -16,9 +16,10 @@ interface ProductCardProps {
   subtitle: string;
   description?: string;
   imageSource: ImageSourcePropType;
+  price?: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, description, imageSource }) => (
+const ProductCard: React.FC<ProductCardProps> = ({ title, subtitle, description, imageSource, price }) => (
   <View style={styles.card}>
     <View style={styles.imageContainer}>
       <Image source={imageSource} style={styles.productImage} resizeMode="cover" />
@@ -62,15 +63,22 @@ const BasketballShop: React.FC = () => {
                 resizeMode="contain"
             />
 
-            <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
-            <Text style={styles.overlaySubtitle}>{selectedProduct.subtitle}</Text>
-            {selectedProduct.description && (
-              <Text style={styles.overlayDescription}>{selectedProduct.description}</Text>
-            )}
+            <View style={styles.overlayText}>
+              <View style={styles.overlayHeader}>
+                <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
+                {selectedProduct.price && (
+                <Text style={styles.overlayPrice}>{selectedProduct.price}</Text>
+              )}
+              </View>
+              <Text style={styles.overlaySubtitle}>{selectedProduct.subtitle}</Text>
+              {selectedProduct.description && (
+                <Text style={styles.overlayDescription}>{selectedProduct.description}</Text>
+              )}
 
-            <TouchableOpacity style={styles.closeButton} onPress={closeOverlay}>
-                <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
+              <TouchableOpacity style={styles.closeButton} onPress={closeOverlay}>
+                  <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
             </View>
         </View>
         )}
@@ -96,6 +104,7 @@ const BasketballShop: React.FC = () => {
                     subtitle: "Call 911",
                     imageSource: require('../../assets/images/shopImages/wilsonNBABall.png'),
                     description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -110,14 +119,16 @@ const BasketballShop: React.FC = () => {
                 onPress={() =>
                     handleCardPress({
                     title: "Spalding NBA",
-                    subtitle: "Call Contact1",
+                    subtitle: "Call Contacts",
                     imageSource: require('../../assets/images/shopImages/spaldingNBABall.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
                 <ProductCard
                     title="Spalding NBA"
-                    subtitle="Call Contact1"
+                    subtitle="Call Contacts"
                     imageSource={require('../../assets/images/shopImages/spaldingNBABall.png')}
                 />
             </TouchableOpacity>
@@ -128,6 +139,8 @@ const BasketballShop: React.FC = () => {
                     title: "Wilson EVO",
                     subtitle: "Call Hotline",
                     imageSource: require('../../assets/images/shopImages/wilsonEVOBall.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -154,6 +167,8 @@ const BasketballShop: React.FC = () => {
                     title: "Madison Square Garden",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/madisonSquareGarden.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -170,6 +185,8 @@ const BasketballShop: React.FC = () => {
                     title: "STAPLES Center",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/staplesCenter.jpg'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -186,6 +203,8 @@ const BasketballShop: React.FC = () => {
                     title: "Capital One Arena",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/capitalOneArena.jpg'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -341,7 +360,7 @@ const styles = StyleSheet.create({
     height: 32,
     width: 32,
   },
-    background: {
+  background: {
     flex: 1,
     width: '100%',
     height: '100%',
@@ -361,21 +380,28 @@ const styles = StyleSheet.create({
   overlayBox: {
     width: '80%',
     backgroundColor: '#1a1f3a',
-    padding: 20,
+    margin: 20,
+    paddingTop: 30,
     borderRadius: 12,
     alignItems: 'center',
   },
   overlayTitle: {
-    fontSize: 24,
+    fontSize: 40,
     fontFamily: 'Jersey10',
-    color: 'white',
-    marginBottom: 10,
-    textAlign: 'center',
+    color: '#1a1f3a',
+    alignSelf: 'flex-start',
+    flex: 1,
+  },
+  overlayPrice: {
+    fontSize: 30,
+    fontFamily: 'Jersey10',
+    color: '#1a1f3a',
+    alignSelf: 'center',
   },
   overlaySubtitle: {
     fontSize: 14,
     fontFamily: 'Jersey10',
-    color: '#bbb',
+    color: '#1a1f3a',
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -398,9 +424,26 @@ const styles = StyleSheet.create({
   overlayDescription: {
     fontSize: 12,
     fontFamily: 'Jersey10',
-    color: '#ccc',
+    color: '#1a1f3a',
     marginBottom: 20,
     textAlign: 'center',
+  },
+  overlayText: {
+    backgroundColor: 'white',
+    width: '100%',
+    padding: 15,
+    paddingBottom: 20,
+    alignItems: 'center',
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+  },
+  overlayHeader: {
+    width: '95%',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 20,
+    borderBottomColor: '#f39c12',
+    borderBottomWidth: 3,
   },
 });
 
