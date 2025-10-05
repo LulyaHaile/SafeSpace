@@ -15,69 +15,44 @@ const { width } = Dimensions.get('window');
 
 const EmergencyCallScreen: React.FC = () => {
   const [fontsLoaded] = useFonts({
-    'Jersey10': require('../assets/fonts/Jersey10-Regular.ttf'), 
+    Jersey10: require('../assets/fonts/Jersey10-Regular.ttf'),
   });
 
-  if (!fontsLoaded) {
-    return null; 
-  }
+  if (!fontsLoaded) return null;
+
   const handleCall911 = (): void => {
     Alert.alert(
-      "Emergency Call",
-      "Are you sure you want to call 911?",
+      'Emergency Call',
+      'Are you sure you want to call 911?',
       [
+        { text: 'Cancel', style: 'cancel' },
         {
-          text: "Cancel",
-          style: "cancel"
+          text: 'Call 911',
+          style: 'destructive',
+          onPress: () => Linking.openURL('tel:911'),
         },
-        {
-          text: "Call 911",
-          style: "destructive",
-          onPress: () => {
-            Linking.openURL('tel:911');
-          }
-        }
       ]
     );
   };
 
-  const PhoneIcon: React.FC = () => (
-    <View style={styles.phoneIconContainer}>
-      <View style={styles.phoneShape}>
-        <Text style={styles.instructionText}>
-          📞
-        </Text>
-      </View>
-    </View>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>CALL 911</Text>
-        </View>
+        {/* Title */}
+        <Text style={styles.titleText}>CALL 911</Text>
 
-        <View style={styles.phoneIconsContainer}>
-          <TouchableOpacity 
-            style={styles.phoneButton}
-            onPress={handleCall911}
-            activeOpacity={0.7}
-          >
-            <PhoneIcon />
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            style={styles.phoneButton}
-            onPress={handleCall911}
-            activeOpacity={0.7}
-          >
-            <PhoneIcon />
-          </TouchableOpacity>
-        </View>
+        {/* Call Button */}
+        <TouchableOpacity
+          style={styles.phoneButton}
+          onPress={handleCall911}
+          activeOpacity={0.7}
+        >
+          <Text style={styles.phoneIcon}>📞</Text>
+        </TouchableOpacity>
 
+        {/* Instruction */}
         <Text style={styles.instructionText}>
-          Press 📞 to call 911
+          Press <Text style={{ fontSize: 24 }}>📞</Text> to call 911
         </Text>
       </View>
     </SafeAreaView>
@@ -95,83 +70,34 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 24,
   },
-  titleContainer: {
-    borderWidth: 2,
-    borderColor: '#323030',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginBottom: 50,
-    borderRadius: 8,
-  },
   titleText: {
     fontSize: Math.min(70, width * 0.15),
-    fontWeight: '900',
     color: '#CC1212',
+    fontFamily: 'Jersey10',
     textAlign: 'center',
     letterSpacing: 2,
-    fontFamily: 'Jersey 10',
-  },
-  phoneIconsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    width: '100%',
-    maxWidth: 300,
-    marginBottom: 40,
+    marginBottom: 50,
   },
   phoneButton: {
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     backgroundColor: '#EAAFAF',
-    borderRadius: 10,
+    borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    marginBottom: 40,
   },
-  phoneIconContainer: {
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  phoneShape: {
-    position: 'relative',
-    width: 40,
-    height: 40,
-  },
-  phoneCurve: {
-    position: 'absolute',
-    width: 25,
-    height: 25,
-    borderWidth: 4,
-    borderColor: '#E91E63',
-  },
-  topCurve: {
-    top: 0,
-    left: 5,
-    borderBottomColor: 'transparent',
-    borderLeftColor: 'transparent',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 15,
-    transform: [{ rotate: '-15deg' }],
-  },
-  bottomCurve: {
-    bottom: 0,
-    right: 5,
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 20,
-    transform: [{ rotate: '-15deg' }],
+  phoneIcon: {
+    fontSize: 40,
+    color: '#CC1212',
   },
   instructionText: {
-    fontSize: 25,
+    fontSize: 20,
     color: '#CC1212',
     textAlign: 'center',
     fontWeight: '600',
