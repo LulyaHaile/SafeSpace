@@ -64,7 +64,7 @@ const BasketballShop: React.FC = () => {
             />
 
             <View style={styles.overlayText}>
-              <View>
+              <View style={styles.overlayHeader}>
                 <Text style={styles.overlayTitle}>{selectedProduct.title}</Text>
                 {selectedProduct.price && (
                 <Text style={styles.overlayPrice}>{selectedProduct.price}</Text>
@@ -119,14 +119,16 @@ const BasketballShop: React.FC = () => {
                 onPress={() =>
                     handleCardPress({
                     title: "Spalding NBA",
-                    subtitle: "Call Contact1",
+                    subtitle: "Call Contacts",
                     imageSource: require('../../assets/images/shopImages/spaldingNBABall.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
                 <ProductCard
                     title="Spalding NBA"
-                    subtitle="Call Contact1"
+                    subtitle="Call Contacts"
                     imageSource={require('../../assets/images/shopImages/spaldingNBABall.png')}
                 />
             </TouchableOpacity>
@@ -137,6 +139,8 @@ const BasketballShop: React.FC = () => {
                     title: "Wilson EVO",
                     subtitle: "Call Hotline",
                     imageSource: require('../../assets/images/shopImages/wilsonEVOBall.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -163,6 +167,8 @@ const BasketballShop: React.FC = () => {
                     title: "Madison Square Garden",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/madisonSquareGarden.png'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -179,6 +185,8 @@ const BasketballShop: React.FC = () => {
                     title: "STAPLES Center",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/staplesCenter.jpg'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -195,6 +203,8 @@ const BasketballShop: React.FC = () => {
                     title: "Capital One Arena",
                     subtitle: "Other Options",
                     imageSource: require('../../assets/images/shopImages/capitalOneArena.jpg'),
+                    description: "description",
+                    price: '100 pts',
                     })
                 }
                 >
@@ -376,16 +386,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlayTitle: {
-    fontSize: 24,
+    fontSize: 40,
     fontFamily: 'Jersey10',
     color: '#1a1f3a',
-    marginBottom: 10,
     alignSelf: 'flex-start',
+    flex: 1,
   },
   overlayPrice: {
-    fontSize: 14,
+    fontSize: 30,
     fontFamily: 'Jersey10',
     color: '#1a1f3a',
+    alignSelf: 'center',
   },
   overlaySubtitle: {
     fontSize: 14,
@@ -420,13 +431,20 @@ const styles = StyleSheet.create({
   overlayText: {
     backgroundColor: 'white',
     width: '100%',
-    alignSelf: 'stretch',
     padding: 15,
     paddingBottom: 20,
     alignItems: 'center',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-  }
+  },
+  overlayHeader: {
+    width: '95%',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: 20,
+    borderBottomColor: '#f39c12',
+    borderBottomWidth: 3,
+  },
 });
 
 export default BasketballShop;
