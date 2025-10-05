@@ -1,144 +1,174 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
+
 export default function LandingPage({ navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>
       {/* App Name */}
       <Text style={styles.title}>SafeSpace</Text>
       <Text style={styles.subtitle}>Your safe space for support & growth</Text>
+
       {/* Emergency Button */}
       <TouchableOpacity
         style={styles.emergencyButton}
         onPress={() => navigation.navigate("Emergency")}
       >
-        <Text style={styles.emergencyText}>EMERGENCY HELP!</Text>
+        <View style={styles.emergencyContent}>
+          <Ionicons name="alert-circle-outline" size={28} color="white" />
+          <Text style={styles.emergencyText}>EMERGENCY HELP</Text>
+        </View>
       </TouchableOpacity>
-      {/* Grid Buttons */}
-      <View style={styles.grid}>
-        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Call")}>
-          <View style={[styles.iconCircle, { backgroundColor: "#FF5B5B" }]}>
-            <FontAwesome name="phone" size={32} color="white" />
+
+      {/* Main Feature Buttons */}
+      <View style={styles.featuresContainer}>
+        <TouchableOpacity
+          style={styles.featureCard}
+          onPress={() => navigation.navigate("Call")}
+        >
+          <View style={styles.iconBox}>
+            <FontAwesome name="phone" size={36} color="black" />
           </View>
-          <Text style={styles.gridText}>call for help</Text>
+          <Text style={styles.featureText}>call for help</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Resources")}>
-          <View style={[styles.iconCircle, { backgroundColor: "#4C6CD9" }]}>
-            <FontAwesome name="search" size={32} color="white" />
+
+        <TouchableOpacity
+          style={styles.featureCard}
+          onPress={() => navigation.navigate("Resources")}
+        >
+          <View style={styles.iconBox}>
+            <FontAwesome name="search" size={36} color="black" />
           </View>
-          <Text style={styles.gridText}>find resources</Text>
+          <Text style={styles.featureText}>find resources</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Chat")}>
-          <View style={[styles.iconCircle, { backgroundColor: "#4CD94C" }]}>
-            <FontAwesome name="comments" size={32} color="white" />
+
+        <TouchableOpacity
+          style={styles.featureCard}
+          onPress={() => navigation.navigate("Guide")}
+        >
+          <View style={styles.iconBox}>
+            <FontAwesome name="lightbulb-o" size={36} color="black" />
           </View>
-          <Text style={styles.gridText}>chat with mentor</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.gridButton} onPress={() => navigation.navigate("Guide")}>
-          <View style={[styles.iconCircle, { backgroundColor: "#D9D44C" }]}>
-            <FontAwesome name="lightbulb-o" size={32} color="white" />
-          </View>
-          <Text style={styles.gridText}>safety guide</Text>
+          <Text style={styles.featureText}>safety guide</Text>
         </TouchableOpacity>
       </View>
+
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="home-outline" size={28} color="white" />
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="chatbubble-outline" size={28} color="white" />
-          <Text style={styles.navText}>Chat</Text>
+          <Ionicons name="search-outline" size={28} color="white" />
+          <Text style={styles.navText}>resources</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
-          <Ionicons name="location-outline" size={28} color="white" />
-          <Text style={styles.navText}>Location</Text>
+          <Ionicons name="basketball-outline" size={28} color="white" />
+          <Text style={styles.navText}>dunk dash</Text>
         </TouchableOpacity>
+
         <TouchableOpacity style={styles.navItem}>
           <Ionicons name="people-outline" size={28} color="white" />
-          <Text style={styles.navText}>Profile</Text>
+          <Text style={styles.navText}>profile</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#10123F",
+    backgroundColor: "#0B0D35", // deep navy background
     alignItems: "center",
-    paddingTop: 40,
-    paddingBottom: 80, // to make room for bottom nav
+    paddingTop: 60,
+    paddingBottom: 80,
   },
   title: {
-    fontSize: 36,
-    fontWeight: "bold",
-    color: "#7CFC00",
-    marginBottom: 8,
+    fontSize: 40,
+    fontWeight: "900",
+    color: "#00FF5B", // neon green
+    fontFamily: "Courier", // pixelated font substitute
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   subtitle: {
-    color: "white",
+    color: "#DADADA",
     fontSize: 16,
-    marginBottom: 20,
+    marginBottom: 30,
   },
   emergencyButton: {
-    backgroundColor: "#D94C4C",
-    paddingVertical: 18,
-    paddingHorizontal: 20,
-    borderRadius: 15,
+    backgroundColor: "#D70000",
     width: "90%",
+    borderRadius: 20,
+    paddingVertical: 18,
+    marginBottom: 35,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 8,
+  },
+  emergencyContent: {
+    flexDirection: "row",
     alignItems: "center",
-    marginBottom: 30,
+    justifyContent: "center",
+    gap: 10,
   },
   emergencyText: {
     color: "white",
     fontSize: 20,
     fontWeight: "bold",
+    fontFamily: "Courier",
   },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+  featuresContainer: {
     width: "90%",
-    marginBottom: 40,
-  },
-  gridButton: {
-    width: "45%",
-    height: 120,
-    borderRadius: 15,
     alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 15,
-    backgroundColor: "#2E3BFF", // consistent background
+    gap: 20,
+  },
+  featureCard: {
+    backgroundColor: "#383C7F",
+    width: "100%",
+    borderRadius: 20,
+    alignItems: "center",
+    paddingVertical: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
   },
-  iconCircle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 8,
+  iconBox: {
+    backgroundColor: "#84A9FF",
+    padding: 18,
+    borderRadius: 15,
+    marginBottom: 10,
   },
-  gridText: {
+  featureText: {
     color: "white",
-    marginTop: 4,
+    fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center",
+    textShadowColor: "black",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
   },
   bottomNav: {
     position: "absolute",
     bottom: 0,
     flexDirection: "row",
-    backgroundColor: "#2E3BFF",
+    backgroundColor: "#8A7DFF",
     width: "100%",
     justifyContent: "space-around",
-    paddingVertical: 12,
+    paddingVertical: 14,
   },
   navItem: {
     alignItems: "center",
@@ -147,6 +177,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
     marginTop: 4,
+    textTransform: "lowercase",
   },
 });
+
+
 
